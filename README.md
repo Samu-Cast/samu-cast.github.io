@@ -4,7 +4,7 @@ Personal website of Samuele Castellani, cybersecurity engineering student at Pol
 
 **Live:** https://samuelecastellani.dev · **Mozilla Observatory:** A+ (160/100)
 
-Hand-written HTML and CSS, plus two small first-party scripts (the bit-cascade animation and the scroll indicator). No frameworks, no trackers, no third-party requests.
+Hand-written HTML and CSS, plus a few small first-party scripts (bit-cascade animation, scroll indicator, email link). No frameworks, no trackers, no third-party requests.
 
 ## Structure
 
@@ -14,6 +14,7 @@ index.html                 main page
 assets/style.css           all styles
 assets/hero.js             bit-cascade animation of the name (canvas)
 assets/rails.js            centered scroll indicator for the horizontal rows
+assets/contact.js          builds the email link at runtime (keeps the address out of the HTML)
 assets/fonts/              Anton and Fira Sans, self-hosted (SIL OFL licenses included)
 assets/favicon.svg
 .well-known/security.txt   security contact (RFC 9116)
