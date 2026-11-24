@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- GitHub Pages can't send custom headers, so the CSP lives here too.
        frame-ancestors is ignored in <meta>: it is set in _headers (Cloudflare Pages). -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="no-referrer">
   <title>Samuele Castellani — Cybersecurity Engineering</title>
   <meta name="description" content="Samuele Castellani, cybersecurity engineering student at Politecnico di Torino. Honeypots, CI/CD, embedded C.">
@@ -14,6 +14,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/Anton-Regular.woff" as="font" type="font/woff" crossorigin>
   <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/hero.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#path">Skip to content</a>
@@ -21,15 +22,16 @@
   <header class="hero">
     <div class="wrap hero__inner">
       <h1 class="name">
-        <span class="redact">Samuele</span>
-        <span class="redact redact--late">Castellani</span>
+        <span class="name__line">Samuele</span>
+        <span class="name__line">Castellani</span>
       </h1>
+
 
       <div class="hero__text">
         <p class="lede">Cybersecurity engineering student at Politecnico di Torino.</p>
         <p>I build honeypots small enough to run on edge hardware, CI pipelines that catch mistakes before they ship, and C code that talks directly to microcontrollers.</p>
         <ul class="hero__links">
-          <li><a class="btn btn--solid" href="assets/CV_Samuele_Castellani.pdf" type="application/pdf">Download CV</a></li>
+          <li><a class="btn btn--solid" href="https://github.com/Samu-Cast/Resume/releases/download/latest/Samuele_Castellani_CV.pdf" rel="noopener noreferrer">Download CV</a></li>
           <li><a class="btn" href="https://github.com/Samu-Cast" rel="noopener noreferrer">GitHub</a></li>
           <li><a class="btn" href="https://www.linkedin.com/in/samuele-castellani/" rel="noopener noreferrer">LinkedIn</a></li>
         </ul>
@@ -52,9 +54,9 @@
           <li>
             <span class="timeline__when">2026 – now</span>
             <div>
-              <h3>MSc in Cybersecurity Engineering</h3>
+              <h3>Twin Track MSc: Cybersecurity Engineering and Computer Engineering</h3>
               <p class="where">Politecnico di Torino, Turin</p>
-              <p>Expected graduation July 2028.</p>
+              <p>Two master’s degrees in parallel (LM-66 and LM-32). Expected graduation July 2028.</p>
             </div>
           </li>
           <li>
@@ -86,7 +88,7 @@
             <div>
               <h3>Lifeguard</h3>
               <p class="where">Various facilities, Rieti</p>
-              <p>Summer seasons. Responsibility, vigilance and staying calm when something goes wrong.</p>
+              <p>Seasonal. Keeping people safe and handling high-pressure situations: crisis management, problem solving, responsibility.</p>
             </div>
           </li>
         </ol>
@@ -97,8 +99,8 @@
         </blockquote>
 
         <dl class="skills">
-          <div><dt>Languages</dt><dd>Python, C/C++, Java, PHP, SQL, HTML/CSS, Assembly</dd></div>
-          <div><dt>Security and networking</dt><dd>Wireshark, network analysis, HTTP hardening, RBAC, CSRF prevention</dd></div>
+          <div><dt>Languages</dt><dd>C/C++, Java, Assembly, Python, SQL, PHP, HTML/CSS</dd></div>
+          <div><dt>Security and networking</dt><dd>Wireshark, Burp, GDB, Ghidra, HTTP hardening, NIST post-quantum standards</dd></div>
           <div><dt>DevOps</dt><dd>Docker, GitHub Actions, CI/CD, build automation, MVC, ROS2</dd></div>
           <div><dt>Methods</dt><dd>Agile (Scrum, Kanban), SDLC, QA and automated testing, requirements analysis</dd></div>
         </dl>
@@ -109,13 +111,25 @@
     <section class="row" aria-labelledby="now-title">
       <div class="wrap row__head">
         <h2 id="now-title">Right now</h2>
-        <p class="muted">What I’m working on this semester.</p>
+        <p class="muted">What I’m working on, and what I’m looking for.</p>
       </div>
       <ul class="rail" tabindex="0" aria-label="Current activities, scroll horizontally">
+        <li class="card card--live card--call">
+          <p class="card__status">Open to offers</p>
+          <h3>Looking for a summer internship, 2027</h3>
+          <p>Security or systems engineering. Ideally in Australia, Canada, the United States, Denmark or Northern Europe.</p>
+          <a class="card__link" href="https://www.linkedin.com/in/samuele-castellani/" rel="noopener noreferrer">Contact me on LinkedIn</a>
+        </li>
         <li class="card card--live">
-          <p class="card__status">Ongoing</p>
-          <h3>MSc in Cybersecurity Engineering</h3>
-          <p>First year at Politecnico di Torino.</p>
+          <p class="card__status">2026 – 2028</p>
+          <h3>Twin Track master’s at Politecnico di Torino</h3>
+          <p>Two master’s degrees in parallel: Cybersecurity Engineering (LM-66) and Computer Engineering (LM-32).</p>
+        </li>
+        <li class="card card--live">
+          <p class="card__status">In progress</p>
+          <h3>Post-quantum cryptography architecture</h3>
+          <p>A client-server testbed that compares three key exchanges: classic X25519, post-quantum ML-KEM-768, and a hybrid of both combined through HKDF. It measures handshake performance and network behavior under realistic conditions: MTU and MSS limits, latency, packet loss, TCP retransmissions.</p>
+          <p class="tags">C++20, CMake, OpenSSL, liboqs, tc/netem, Wireshark, Python</p>
         </li>
         <li class="card card--live">
           <p class="card__status">Ongoing</p>
@@ -125,7 +139,7 @@
         <li class="card card--live">
           <p class="card__status">Ongoing</p>
           <h3>This website</h3>
-          <p>Static HTML and CSS. No JavaScript, no trackers, no third-party requests, strict Content Security Policy.</p>
+          <p>Static HTML and CSS plus one small first-party script for the animation. No trackers, no third-party requests, strict CSP with Trusted Types.</p>
         </li>
       </ul>
     </section>
@@ -137,6 +151,12 @@
         <p class="muted">Things I designed, built and tested.</p>
       </div>
       <ul class="rail" tabindex="0" aria-label="Projects, scroll horizontally">
+        <li class="card card--live">
+          <p class="card__status">Oct 2026 – now</p>
+          <h3>Post-quantum cryptography architecture</h3>
+          <p>A quantum-safe architectural framework built on post-quantum cryptographic algorithms and NIST guidelines. Researching mitigations against quantum threats and implementing a proof-of-concept module for secure data transmission.</p>
+          <p class="tags">Python, Qiskit, NIST PQC</p>
+        </li>
         <li class="card">
           <p class="card__status">2026</p>
           <h3>HoneyNet for edge devices</h3>
@@ -148,7 +168,7 @@
           <p class="card__status">2025 – 2026</p>
           <h3>Autonomous robot navigation</h3>
           <p>An algorithm that lets an iRobot Create navigate on its own, reach coordinates and recognise color-coded targets. Tested in simulation with CI pipelines before running on the real robot.</p>
-          <p class="tags">Python, Docker, GitHub Actions, simulation</p>
+          <p class="tags">Python, Docker, GitHub Actions, ROS2</p>
         </li>
         <li class="card">
           <p class="card__status">2025</p>
@@ -200,12 +220,12 @@
       <ul class="contact__list">
         <li><a href="https://www.linkedin.com/in/samuele-castellani/" rel="noopener noreferrer"><span>LinkedIn</span><span class="contact__handle">in/samuele-castellani</span></a></li>
         <li><a href="https://github.com/Samu-Cast" rel="noopener noreferrer"><span>GitHub</span><span class="contact__handle">Samu-Cast</span></a></li>
-        <li><a href="assets/CV_Samuele_Castellani.pdf" type="application/pdf"><span>CV</span><span class="contact__handle">PDF, 1 page</span></a></li>
+        <li><a href="https://github.com/Samu-Cast/Resume/releases/download/latest/Samuele_Castellani_CV.pdf" rel="noopener noreferrer"><span>CV</span><span class="contact__handle">PDF, always the latest version</span></a></li>
         <!-- Email: decide later. Use a dedicated address (not your main one), e.g.
         <li><a href="mailto:hello&#64;example.com"><span>Email</span><span class="contact__handle">hello&#64;example.com</span></a></li>
         -->
       </ul>
-      <p class="colophon">© 2026 Samuele Castellani. Handwritten HTML and CSS, zero JavaScript. Security contact in <a href="/.well-known/security.txt">security.txt</a>.</p>
+      <p class="colophon">© 2026 Samuele Castellani. Handwritten HTML, CSS and one first-party script. No trackers. Security contact in <a href="/.well-known/security.txt">security.txt</a>.</p>
     </div>
   </footer>
 </body>

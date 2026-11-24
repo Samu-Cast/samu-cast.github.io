@@ -1,6 +1,6 @@
-Ω# samu-cast.github.io
+# samu-cast.github.io
 
-Sito personale di Samuele Castellani. HTML e CSS statici, zero JavaScript, zero richieste a terzi.
+Sito personale di Samuele Castellani. HTML e CSS statici più un solo script nostro (animazione del nome), zero richieste a terzi.
 
 ## Struttura
 
@@ -10,7 +10,6 @@ index.html                 pagina principale
 assets/style.css           tutti gli stili
 assets/fonts/              Anton e Fira Sans, self-hosted (licenza SIL OFL inclusa)
 assets/favicon.svg
-assets/CV_Samuele_Castellani.pdf   CV pubblico (senza numero di telefono)
 .well-known/security.txt   contatto per segnalazioni di sicurezza (RFC 9116)
 _headers                   header HTTP di sicurezza (Cloudflare Pages / Netlify)
 .nojekyll                  dice a GitHub Pages di servire anche .well-known/
@@ -32,10 +31,10 @@ robots.txt
 ## Sicurezza
 
 Cosa c'è già:
-- Content Security Policy `default-src 'none'`: il browser può caricare solo CSS, font e immagini dal sito stesso. Nessuno script può girare, nemmeno se qualcuno riuscisse a iniettare HTML.
+- Content Security Policy `default-src 'none'` con `script-src 'self'`: gira solo `assets/hero.js`, nessuno script inline o esterno. In più Trusted Types blocca le iniezioni nel DOM.
 - Nessuna risorsa esterna (font inclusi), quindi niente supply chain di terzi e niente tracciamento.
 - `Referrer-Policy: no-referrer`, link esterni con `rel="noopener noreferrer"`.
-- CV pubblico senza numero di telefono.
+- Il CV non è nel repo: i link puntano all'ultima release di https://github.com/Samu-Cast/Resume (tag `latest`), che si aggiorna da sola a ogni push del `.tex`.
 
 Limite di GitHub Pages: non permette header HTTP custom. Il CSP funziona via `<meta>`, ma mancano HSTS personalizzato, anti-clickjacking (`frame-ancestors`, `X-Frame-Options`), `Permissions-Policy` ecc. Per avere tutto: pubblica lo stesso repo su **Cloudflare Pages**, che legge il file `_headers`.
 

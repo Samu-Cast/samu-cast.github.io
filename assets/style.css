@@ -85,6 +85,8 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 /* ---------------- Hero ---------------- */
 
 .hero {
+  position: relative;
+  overflow: hidden;
   min-height: 94svh;
   display: flex;
   align-items: stretch;
@@ -101,33 +103,10 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
   align-self: end;
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(4.2rem, 21vw, 13.5rem);
+  font-size: clamp(3.6rem, 18vw, 9.5rem);
   line-height: 0.9;
   letter-spacing: -0.005em;
   text-transform: none;
-}
-.redact {
-  position: relative;
-  display: block;
-  width: fit-content;
-}
-.redact + .redact { color: var(--red); }
-
-/* The one moment of motion: the redaction bars lift once on load. */
-.redact::after {
-  content: "";
-  position: absolute;
-  inset: -0.02em -0.04em -0.03em;
-  background: var(--red);
-  transform-origin: right center;
-  transform: scaleX(0);
-  animation: declassify 0.75s cubic-bezier(0.7, 0, 0.2, 1) 0.25s backwards;
-}
-.redact--late::after { background: var(--bone); animation-delay: 0.45s; }
-
-@keyframes declassify {
-  from { transform: scaleX(1); }
-  to   { transform: scaleX(0); }
 }
 
 .hero__text { max-width: 36rem; display: grid; gap: 0.9rem; }
@@ -149,6 +128,16 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 .btn--solid:hover { background: var(--red-bright); border-color: var(--red-bright); color: var(--black); }
 
 .hero__meta { color: var(--ash); font-size: 0.92rem; }
+
+/* Bit cascade (assets/hero.js). Without JS the name simply fades in. */
+.hero__inner { position: relative; z-index: 1; }
+.bits { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.name__line { display: block; width: fit-content; }
+.name__line + .name__line { color: var(--red); }
+.name { opacity: 0; animation: name-in 0.5s ease 0.6s forwards; }
+.name--pending { animation: none; opacity: 0; }
+.name--formed { opacity: 1; transition: opacity 0.45s ease; }
+@keyframes name-in { to { opacity: 1; } }
 
 /* ---------------- Path ---------------- */
 
@@ -227,12 +216,20 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--inset);
   padding: 4px var(--inset) 22px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--red) var(--line);
 }
-.rail::-webkit-scrollbar { height: 6px; }
-.rail::-webkit-scrollbar-track { background: var(--line); }
+
+/* Scrollbar: thin, and its track only spans the central column.
+   Chrome/Safari: the ::-webkit pseudo-elements (track margin keeps it centered).
+   Firefox: only supports colour and width, so it gets a thin, muted bar. */
+.rail::-webkit-scrollbar { height: 3px; }
+.rail::-webkit-scrollbar-track {
+  background: var(--line);
+  margin-inline: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+}
 .rail::-webkit-scrollbar-thumb { background: var(--red); }
+@supports (-moz-appearance: none) {
+  .rail { scrollbar-width: thin; scrollbar-color: #7a0f1b transparent; }
+}
 
 .card {
   scroll-snap-align: start;
@@ -248,7 +245,8 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 .card--live .card__status { color: var(--red-bright); }
 .card > p:not(.card__status):not(.tags) { color: #cfcac3; font-size: 0.98rem; }
 .tags { margin-top: auto; padding-top: 0.6rem; font-size: 0.86rem; color: var(--ash); font-style: italic; }
-.card__link { font-weight: 500; font-size: 0.95rem; }
+.card__link { font-weight: 500; font-size: 0.95rem; margin-top: auto; padding-top: 0.4rem; }
+.card--call { border-color: var(--red); background: rgba(227, 18, 43, 0.07); }
 
 /* ---------------- Contact ---------------- */
 
@@ -278,12 +276,13 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .redact::after { animation: none; display: none; }
+  .name, .name--pending { animation: none; opacity: 1; }
+  .bits { display: none; }
 }
 
 @media print {
   body { background: #fff; color: #000; }
-  .redact::after, .skip { display: none; }
+  .bits, .skip { display: none; }
   .rail { overflow: visible; grid-auto-flow: row; padding-inline: 0; }
 }
 
