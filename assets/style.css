@@ -218,18 +218,39 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
   padding: 4px var(--inset) 22px;
 }
 
-/* Scrollbar: thin, and its track only spans the central column.
-   Chrome/Safari: the ::-webkit pseudo-elements (track margin keeps it centered).
-   Firefox: only supports colour and width, so it gets a thin, muted bar. */
-.rail::-webkit-scrollbar { height: 3px; }
-.rail::-webkit-scrollbar-track {
+/* Without JS: thin native scrollbar. With JS (assets/rails.js): native bar hidden,
+   replaced by a small centered indicator that can be dragged or clicked. */
+.rail { scrollbar-width: thin; scrollbar-color: #7a0f1b transparent; }
+.rail--js { scrollbar-width: none; padding-bottom: 6px; }
+.rail--js::-webkit-scrollbar { display: none; }
+.rail--dragging { scroll-snap-type: none; }
+
+.rail-bar {
+  position: relative;
+  width: 140px;
+  height: 20px;
+  margin: 14px auto 0;
+  cursor: pointer;
+  touch-action: none;
+}
+.rail-bar[hidden] { display: none; }
+.rail-bar::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 2px;
+  margin-top: -1px;
   background: var(--line);
-  margin-inline: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
 }
-.rail::-webkit-scrollbar-thumb { background: var(--red); }
-@supports (-moz-appearance: none) {
-  .rail { scrollbar-width: thin; scrollbar-color: #7a0f1b transparent; }
+.rail-bar__thumb {
+  position: absolute;
+  left: 0; top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  background: var(--red);
+  will-change: transform;
 }
+.rail-bar:hover .rail-bar__thumb { background: var(--red-bright); }
 
 .card {
   scroll-snap-align: start;
@@ -282,7 +303,7 @@ h3 { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 
 @media print {
   body { background: #fff; color: #000; }
-  .bits, .skip { display: none; }
+  .bits, .skip, .rail-bar { display: none; }
   .rail { overflow: visible; grid-auto-flow: row; padding-inline: 0; }
 }
 
