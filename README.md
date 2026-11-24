@@ -1,4 +1,4 @@
-# samu-cast.github.io
+# samuelecastellani.dev
 
 Sito personale di Samuele Castellani. HTML e CSS statici più un solo script nostro (animazione del nome), zero richieste a terzi.
 
@@ -21,12 +21,14 @@ robots.txt
 1. Copia tutto il contenuto di questa cartella (anche i file nascosti `.nojekyll` e `.well-known/`) nella root del repo `Samu-Cast.github.io`.
 2. `git add -A && git commit -m "First version of the site" && git push`
 3. Settings → Pages → Deploy from a branch → `main` / `(root)`.
-4. Il sito è su https://samu-cast.github.io
+4. Il sito è su https://samuelecastellani.dev (dominio su Cloudflare, record DNS only verso GitHub Pages).
+
+Il file `CNAME` nel repo lo crea GitHub: non cancellarlo, e fai `git pull` prima di copiare file nuovi.
 
 ## Da completare
 
 - `index.html`: cerca `TODO`. Nome e data dell'hackathon al PoliTo, card CyberChallenge (commentata), link ai repo dei progetti (commentati), email (commentata).
-- `.well-known/security.txt`: quando hai l'indirizzo definitivo aggiungi la riga `Canonical:` e, se vuoi, un contatto email. Rinnova `Expires` prima della scadenza (max 1 anno).
+- `.well-known/security.txt`: rinnova `Expires` prima della scadenza (max 1 anno). Se crei una mail sul dominio, aggiungila come `Contact:`.
 
 ## Sicurezza
 
